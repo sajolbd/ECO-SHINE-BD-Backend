@@ -5,7 +5,10 @@ export const connectDB = async (): Promise<void> => {
 
   if (!uri) {
     console.error("Error: MONGODB_URI environment variable is missing.");
-    process.exit(1);
+    if (process.env.VERCEL !== "1") {
+      process.exit(1);
+    }
+    return;
   }
 
   try {
@@ -13,6 +16,8 @@ export const connectDB = async (): Promise<void> => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error: any) {
     console.error(`MongoDB Connection Error: ${error.message}`);
-    process.exit(1);
+    if (process.env.VERCEL !== "1") {
+      process.exit(1);
+    }
   }
 };
