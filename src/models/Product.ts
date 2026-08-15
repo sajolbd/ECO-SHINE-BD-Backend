@@ -22,6 +22,7 @@ export interface IProduct extends Document {
   category: string;
   categoryId: string;
   price: number;
+  costPrice: number;
   originalPrice?: number;
   rating: number;
   reviewsCount: number;
@@ -53,6 +54,7 @@ const ProductSchema = new Schema<IProduct>(
     category: { type: String, required: true },
     categoryId: { type: String, required: true, index: true },
     price: { type: Number, required: true, min: 0 },
+    costPrice: { type: Number, required: true, default: 0, min: 0 },
     originalPrice: { type: Number, min: 0 },
     rating: { type: Number, default: 4.8, min: 1, max: 5 },
     reviewsCount: { type: Number, default: 100 },

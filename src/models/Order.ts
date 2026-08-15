@@ -5,6 +5,7 @@ export interface IOrderItem {
   productRef: Types.ObjectId; // Reference to product doc
   title: string;
   price: number;
+  costPrice: number;
   quantity: number;
   image: string;
 }
@@ -33,6 +34,7 @@ const OrderItemSchema = new Schema<IOrderItem>({
   productRef: { type: Schema.Types.ObjectId, ref: "Product", required: true },
   title: { type: String, required: true },
   price: { type: Number, required: true },
+  costPrice: { type: Number, required: true, default: 0 },
   quantity: { type: Number, required: true, min: 1 },
   image: { type: String, required: true },
 });

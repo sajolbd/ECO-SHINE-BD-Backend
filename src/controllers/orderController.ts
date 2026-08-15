@@ -59,6 +59,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
         productRef: product._id as Types.ObjectId,
         title: product.title,
         price: product.price,
+        costPrice: product.costPrice || 0,
         quantity: item.quantity,
         image: product.images[0] || "",
       });
