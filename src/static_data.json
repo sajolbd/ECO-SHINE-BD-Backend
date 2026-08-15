@@ -1,0 +1,484 @@
+{
+  "categories": [
+    {
+      "id": "autocare",
+      "name": "অটো কেয়ার & কার ওয়াশ (Auto Care)",
+      "iconName": "Car"
+    },
+    {
+      "id": "homecare",
+      "name": "হোম & গ্রিজ ক্লিনার (Home Care)",
+      "iconName": "Home"
+    }
+  ],
+  "products": [
+    {
+      "id": "auto-1",
+      "title": "বাবল বস কালার গার্ড ফোমিং জেল (৫৫০ মিলি)",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 350,
+      "originalPrice": 450,
+      "rating": 4.9,
+      "reviewsCount": 640,
+      "images": [
+        "/images/products/product-7.jpeg",
+        "/images/products/product-5.jpeg",
+        "/images/products/product-8.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫৫০ মিলি (সাথে ১টি ফ্রি মাইক্রোফাইবার টাওয়েল)",
+      "badge": "হট ডিল",
+      "description": "আপনার প্রিয় গাড়ির পেইন্ট সুরক্ষা ও চকচকে ফোম ওয়াশের জন্য সেরা বাবল বস কালার গার্ড ফোমিং জেল।"
+    },
+    {
+      "id": "auto-2",
+      "title": "প্রিমিয়াম কার & বাইক ওয়ালা ও ওয়াক্স (২৫০ গ্রাম)",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 450,
+      "originalPrice": 580,
+      "rating": 4.8,
+      "reviewsCount": 780,
+      "images": [
+        "/images/products/product-6.jpeg",
+        "/images/products/product-5.jpeg",
+        "/images/products/product-3.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২৫০ গ্রাম ক্যান",
+      "badge": "বেস্ট সেলার",
+      "description": "জাপানি ফর্মুলায় তৈরি কার ও বাইক ওয়াক্স, যা এনে দেয় আয়নার মতো চকচকে গ্লস এবং স্ক্র্যাচ প্রোটেকশন।"
+    },
+    {
+      "id": "auto-3",
+      "title": "বাবল বস কালার গার্ড ফোমিং জেল ৫ লিটার ক্যান",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 1680,
+      "originalPrice": 1950,
+      "rating": 4.9,
+      "reviewsCount": 820,
+      "images": [
+        "/images/products/product-3.jpeg",
+        "/images/products/product-4.jpeg",
+        "/images/products/product-7.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫ লিটার ক্যানিস্টার",
+      "badge": "পপুলার",
+      "description": "গ্যারেজ, সার্ভিস সেন্টার এবং নিয়মিত গাড়ি পরিষ্কারের জন্য বড় ৫ লিটার বাবল বস কালার গার্ড ক্যান।"
+    },
+    {
+      "id": "auto-4",
+      "title": "বাবল বস কালার গার্ড ফোমিং জেল (২৫০ মিলি)",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 250,
+      "originalPrice": 300,
+      "rating": 4.9,
+      "reviewsCount": 890,
+      "images": [
+        "/images/products/product-8.jpeg",
+        "/images/products/product-5.jpeg",
+        "/images/products/product-7.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২৫০ মিলি বোটল",
+      "badge": "সেরা মান",
+      "description": "ছোট সাইজের ট্রাভেল ও বাইক ওয়াশ ফ্রেন্ডলি বাবল বস ফোমিং জেল বোটল।"
+    },
+    {
+      "id": "auto-5",
+      "title": "ন্যানোটেক সাইন & পেইন্ট কোটিং কিট",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 750,
+      "originalPrice": 950,
+      "rating": 4.9,
+      "reviewsCount": 1500,
+      "images": [
+        "/images/products/product-4.jpeg",
+        "/images/products/product-6.jpeg",
+        "/images/products/product-3.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "১টি ফুল কিট",
+      "badge": "ফিচার্ড",
+      "description": "গাড়ির রঙ ও সারফেস দীর্ঘস্থায়ী করার জন্য ন্যানো টেকনোলজির ওয়াটারপ্রুফিং ও কোটিং সলিউশন।"
+    },
+    {
+      "id": "auto-6",
+      "title": "ইকো সারফেস প্রটেকশন শাইন স্প্রে",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 380,
+      "originalPrice": 480,
+      "rating": 4.9,
+      "reviewsCount": 1200,
+      "images": [
+        "/images/products/eco_shine_wood_polish.png",
+        "/images/products/product-6.jpeg",
+        "/images/products/product-8.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি স্প্রে",
+      "badge": "ইকো চয়েস",
+      "description": "গাড়ির ড্যাশবোর্ড, বডি ও মেটাল সারফেস মুহূর্তেই চকচকে করার কার্যকরী স্প্রে।"
+    },
+    {
+      "id": "auto-7",
+      "title": "বাবল বস আল্ট্রা ফোমিং ওয়াশ কম্বো প্যাক",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 890,
+      "originalPrice": 1100,
+      "rating": 4.8,
+      "reviewsCount": 420,
+      "images": [
+        "/images/products/product-3.jpeg",
+        "/images/products/product-7.jpeg",
+        "/images/products/product-5.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "কম্বো সেট",
+      "badge": "অফার",
+      "description": "কার ফোমিং ওয়াশ জেল এবং শাইনিং ওয়াক্স একসাথে বিশেষ সাশ্রয়ী কম্বো প্যাকেজে।"
+    },
+    {
+      "id": "auto-8",
+      "title": "বাবল বস সুপার কালার সেভার ওয়াশ",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 320,
+      "originalPrice": 400,
+      "rating": 4.7,
+      "reviewsCount": 390,
+      "images": [
+        "/images/products/product-5.jpeg",
+        "/images/products/product-8.jpeg",
+        "/images/products/product-7.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি",
+      "description": "গাড়ির রঙ ফ্যাকাশে হওয়া প্রতিরোধ করে এবং রোদে গ্লস বজায় রাখে।"
+    },
+    {
+      "id": "auto-9",
+      "title": "কার & বাইক টায়ার সাইন ব্লাস্টার স্প্রে",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 420,
+      "originalPrice": 520,
+      "rating": 4.8,
+      "reviewsCount": 510,
+      "images": [
+        "/images/products/product-6.jpeg",
+        "/images/products/product-3.jpeg",
+        "/images/products/product-5.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৪০০ মিলি",
+      "description": "টায়ারকে নতুনের মতো কালো এবং দীর্ঘস্থায়ী শাইন উপহার দিতে বিশেষ টায়ার শাইনার।"
+    },
+    {
+      "id": "auto-10",
+      "title": "ইকো সাইন ইন্টারিয়র ড্যাশবোর্ড শ্যাম্পু",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 290,
+      "originalPrice": 380,
+      "rating": 4.9,
+      "reviewsCount": 610,
+      "images": [
+        "/images/products/product-8.jpeg",
+        "/images/products/product-7.jpeg",
+        "/images/products/product-6.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২৫০ মিলি",
+      "description": "গাড়ির ভেতরের চামড়া, ড্যাশবোর্ড ও প্লাস্টিক পার্টস ধূলোবালি থেকে সুরক্ষিত রাখে।"
+    },
+    {
+      "id": "auto-11",
+      "title": "বাবল বস হেডলাইট রিস্টোরার পলিশ",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 490,
+      "originalPrice": 650,
+      "rating": 4.8,
+      "reviewsCount": 340,
+      "images": [
+        "/images/products/product-6.jpeg",
+        "/images/products/product-4.jpeg",
+        "/images/products/product-5.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২০০ গ্রাম",
+      "description": "হলদে হয়ে যাওয়া পুরনো হেডলাইট কাচ কাচের মতো পরিষ্কার ও স্বচ্ছ করতে সাহায্য করে।"
+    },
+    {
+      "id": "auto-12",
+      "title": "ইকো সাইন বাইক কেরোসিন ফ্রি ক্লাসিক পলিশ",
+      "category": "অটো কেয়ার & কার ওয়াশ",
+      "categoryId": "autocare",
+      "price": 360,
+      "originalPrice": 450,
+      "rating": 4.9,
+      "reviewsCount": 710,
+      "images": [
+        "/images/products/product-6.jpeg",
+        "/images/products/product-5.jpeg",
+        "/images/products/product-8.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২৫০ মিলি",
+      "description": "বাইকের মেটাল ও বডি পার্টসে কোনো ক্ষতি ছাড়াই প্রিমিয়াম গ্লস প্রদান করে।"
+    },
+    {
+      "id": "home-1",
+      "title": "ইকো সাইন কিচেন & টাইলস ক্লিনার (গ্রিজ কাটার)",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 299,
+      "originalPrice": 380,
+      "rating": 4.9,
+      "reviewsCount": 950,
+      "images": [
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_degreaser.png",
+        "/images/products/eco_shine_floor_cleaner.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি (সাথে ১টি ফ্রি স্ক্রাবার)",
+      "badge": "হট সেল",
+      "description": "রান্নাঘরের জেদি তেলের দাগ ও টাইলসের ময়লা দ্রুত পরিষ্কার করার জন্য শক্তিশালী স্প্রে।"
+    },
+    {
+      "id": "home-2",
+      "title": "ট্যাংক গার্ড অ্যাডভান্সড ওয়াটার ট্যাংক ক্লিনিং সলিউশন",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 550,
+      "originalPrice": 700,
+      "rating": 4.9,
+      "reviewsCount": 1200,
+      "images": [
+        "/images/products/product-1.jpeg",
+        "/images/products/eco_shine_floor_cleaner.png",
+        "/images/products/product-2.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "১ লিটার বোটল",
+      "badge": "টপ চয়েস",
+      "description": "বাসাবাড়ির পানির ট্যাংকের শেওলা, দুর্গন্ধ ও ৯৯.৯% ব্যাকটেরিয়া ধুয়ে ফেলতে নির্ভরযোগ্য সলিউশন।"
+    },
+    {
+      "id": "home-3",
+      "title": "ইকো সাইন বায়ো কিচেন গ্রিজ রিমুভার স্প্রে",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 380,
+      "originalPrice": 480,
+      "rating": 4.8,
+      "reviewsCount": 780,
+      "images": [
+        "/images/products/eco_shine_degreaser.png",
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_floor_cleaner.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি স্প্রে",
+      "badge": "ইকো ফ্রেন্ডলি",
+      "description": "চুলার চারপাশ, কিচেন হুড ও স্টোভের পোড়া তেলের কড়া দাগ সহজেই দূর করে।"
+    },
+    {
+      "id": "home-4",
+      "title": "ইকো সাইন ফ্লোর & টাইলস হাইজিন ক্লিনার",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 340,
+      "originalPrice": 420,
+      "rating": 4.9,
+      "reviewsCount": 650,
+      "images": [
+        "/images/products/eco_shine_floor_cleaner.png",
+        "/images/products/product-2.jpeg",
+        "/images/products/product-1.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "১ লিটার বোটল",
+      "description": "মার্বেল ও টাইলসের ফ্লোর ঝকঝকে ও সুগন্ধযুক্ত রাখার নিরাপদ ইকো ক্লিনার।"
+    },
+    {
+      "id": "home-5",
+      "title": "ইকো সাইন ক্রিস্টাল গ্লাস & মিরর শাইনার",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 280,
+      "originalPrice": 350,
+      "rating": 4.8,
+      "reviewsCount": 820,
+      "images": [
+        "/images/products/eco_shine_glass_cleaner.png",
+        "/images/products/eco_shine_wood_polish.png",
+        "/images/products/product-2.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি স্প্রে",
+      "badge": "নতুন",
+      "description": "জানালার কাচ, আয়না ও গ্লাস টেবিল দাগহীন ও স্ফটিকের মতো পরিষ্কার করে।"
+    },
+    {
+      "id": "home-6",
+      "title": "ইকো সাইন উড & ফার্নিচার পলিশ স্প্রে",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 420,
+      "originalPrice": 520,
+      "rating": 4.9,
+      "reviewsCount": 640,
+      "images": [
+        "/images/products/eco_shine_wood_polish.png",
+        "/images/products/product-1.jpeg",
+        "/images/products/product-2.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৪০০ মিলি",
+      "badge": "প্রিমিয়াম",
+      "description": "কাঠের ফার্নিচার, ডোর ও ক্যাবিনেট নতুন রাখার প্রাকৃতিক প্রটেক্টিভ উড পলিশ।"
+    },
+    {
+      "id": "home-7",
+      "title": "ইকো ওয়াটারপ্রুফিং & রুফ সিলান্ট সলিউশন",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 1250,
+      "originalPrice": 1500,
+      "rating": 4.8,
+      "reviewsCount": 480,
+      "images": [
+        "/images/products/product-1.jpeg",
+        "/images/products/eco_shine_floor_cleaner.png",
+        "/images/products/product-2.jpeg"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "২.৫ লিটার বালতি",
+      "description": "ছাদের স্যাঁতসেঁতে ভাব, পানির লিক ও ফাটল স্থায়ীভাবে বন্ধ করতে ওয়াটারপ্রুফ কোটিং।"
+    },
+    {
+      "id": "home-8",
+      "title": "ওয়াশরুম টাইলস & মেটাল শাইন সলিউশন",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 310,
+      "originalPrice": 390,
+      "rating": 4.7,
+      "reviewsCount": 530,
+      "images": [
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_floor_cleaner.png",
+        "/images/products/eco_shine_degreaser.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি",
+      "description": "ট্যাপ, বেসিন ও বেসিনের ফিটিংয়ের পানির সাদা ক্ষার দাগ সহজেই রিমুভ করে।"
+    },
+    {
+      "id": "home-9",
+      "title": "কিচেন চিমনি & ওভেন হেভি ডিউটি ক্লিনার",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 460,
+      "originalPrice": 580,
+      "rating": 4.9,
+      "reviewsCount": 670,
+      "images": [
+        "/images/products/eco_shine_degreaser.png",
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_floor_cleaner.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি",
+      "description": "কিচেন ফিল্টার চিমনি ও মাইক্রোওভেনের জমে থাকা তেল কাটার কার্যকর ক্লিনজার।"
+    },
+    {
+      "id": "home-10",
+      "title": "হোম অ্যালুমিনিয়াম & গ্লাস ফ্রেমিং শাইনার",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 390,
+      "originalPrice": 480,
+      "rating": 4.8,
+      "reviewsCount": 390,
+      "images": [
+        "/images/products/eco_shine_glass_cleaner.png",
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_wood_polish.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৪০০ মিলি",
+      "description": "বাসার অ্যালুমিনিয়াম উইন্ডো ও গ্লাস পার্টিশন নতুন রাখার অ্যান্টি-ডাস্ট স্প্রে।"
+    },
+    {
+      "id": "home-11",
+      "title": "মাল্টি সারফেস অ্যান্টি-ব্যাকটেরিয়াল শাইন স্প্রে",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 350,
+      "originalPrice": 420,
+      "rating": 4.9,
+      "reviewsCount": 880,
+      "images": [
+        "/images/products/eco_shine_wood_polish.png",
+        "/images/products/product-2.jpeg",
+        "/images/products/eco_shine_glass_cleaner.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "৫০০ মিলি",
+      "description": "ডাইনিং টেবিল, ফ্রিজের বাইরের অংশ ও প্লাস্টিক আসবাব জীবনুমুক্ত ও উজ্জ্বল রাখার স্প্রে।"
+    },
+    {
+      "id": "home-12",
+      "title": "ইকো সানরাইজ সোলার প্যানেল ক্লিনার সলিউশন",
+      "category": "হোম & গ্রিজ ক্লিনার",
+      "categoryId": "homecare",
+      "price": 680,
+      "originalPrice": 850,
+      "rating": 4.9,
+      "reviewsCount": 310,
+      "images": [
+        "/images/products/product-1.jpeg",
+        "/images/products/eco_shine_glass_cleaner.png",
+        "/images/products/eco_shine_floor_cleaner.png"
+      ],
+      "phone": "01958-058359",
+      "whatsapp": "8801958058359",
+      "unit": "১ লিটার",
+      "description": "সোলার প্যানেলের ধূলিকণা ও ময়লা ধুয়ে সর্বোচ্চ বিদ্যুৎ উৎপাদন বজায় রাখে।"
+    }
+  ]
+}

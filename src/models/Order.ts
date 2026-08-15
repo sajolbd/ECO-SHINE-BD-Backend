@@ -1,0 +1,66 @@
+import { Schema, model, Document, Types } from "mongoose";
+
+export interface IOrderItem {
+  productId: string; // The text ID e.g. "auto-1"
+  productRef: Types.ObjectId; // Reference to product doc
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+export interface IOrder extends Document {
+  orderId: string; // unique order code e.g. "ESB-123456"
+  customerName: string;
+  phone: string;
+  email?: string;
+  address: string;
+  deliveryArea: "inside" | "outside";
+  deliveryFee: number;
+  items: IOrderItem[];
+  subtotal: number;
+  total: number;
+  paymentMethod: string;
+  status: "pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled";
+  note?: string;
+  dateString: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const OrderItemSchema = new Schema<IOrderItem>({
+  productId: { type: String, required: true },
+  productRef: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+  title: { type: String, required: true },
+  price: { type: Number, required: true },
+  quantity: { type: Number, required: true, min: 1 },
+  image: { type: String, required: true },
+});
+
+const OrderSchema = new Schema<IOrder>(
+  {
+    orderId: { type: String, required: true, unique: true, index: true },
+    customerName: { type: String, required: true },
+    phone: { type: String, required: true, index: true },
+    email: { type: String },
+    address: { type: String, required: true },
+    deliveryArea: { type: String, enum: ["inside", "outside"], required: true },
+    deliveryFee: { type: Number, required: true },
+    items: { type: [OrderItemSchema], required: true },
+    subtotal: { type: Number, required: true },
+    total: { type: Number, required: true },
+    paymentMethod: { type: String, default: "ক্যাশ অন ডেলিভারি (Cash on Delivery)" },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled"],
+      default: "pending",
+      required: true,
+      index: true,
+    },
+    note: { type: String },
+    dateString: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+export const Order = model<IOrder>("Order", OrderSchema);
