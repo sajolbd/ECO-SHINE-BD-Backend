@@ -8,10 +8,13 @@ export const uploadMedia = async (req: Request, res: Response, next: NextFunctio
       return res.status(400).json({ success: false, message: "Please select an image file to upload." });
     }
 
-    const { url, publicId, format, sizeBytes } = await uploadToCloudinary(
-      req.file.buffer,
-      "ecoshine"
-    );
+    const base64Data = req.file.buffer.toString("base64");
+    const mimeType = req.file.mimetype;
+    const url = `data:${mimeType};base64,${base64Data}`;
+    
+    const publicId = `local-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const format = req.file.mimetype.split("/")[1] || "jpeg";
+    const sizeBytes = req.file.size;
 
     const media = await Media.create({
       url,
@@ -66,8 +69,14 @@ export const deleteMedia = async (req: Request, res: Response, next: NextFunctio
       return res.status(404).json({ success: false, message: "Media resource not found to delete." });
     }
 
-    // Delete asset from Cloudinary
-    await deleteFromCloudinary(media.publicId);
+    // Delete asset from Cloudinary if it's not locally stored in DB
+    if (!media.publicId.startsWith("local-")) {
+      try {
+        await deleteFromCloudinary(media.publicId);
+      } catch (err) {
+        console.error("Cloudinary deletion failed, continuing:", err);
+      }
+    }
 
     // Delete record from DB
     await Media.findByIdAndDelete(media._id);
