@@ -115,10 +115,11 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { status, search, limit = 50, page = 1 } = req.query;
+    const { status, callStatus, search, limit = 50, page = 1 } = req.query;
 
     const query: any = {};
     if (status) query.status = status;
+    if (callStatus) query.lastCallStatus = callStatus;
 
     if (search) {
       query.$or = [
@@ -235,3 +236,149 @@ export const updateOrderStatus = async (req: Request, res: Response, next: NextF
     next(error);
   }
 };
+
+export const addCallLog = async (req: any, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const { callResult, notes, followUpDate, callerName: customCallerName, syncOrderStatus } = req.body;
+
+    const validResults = [
+      "confirmed",
+      "cancelled",
+      "no_answer",
+      "busy",
+      "wrong_number",
+      "phone_off",
+      "callback_requested",
+    ];
+
+    if (!callResult || !validResults.includes(callResult)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing callResult. Valid values: " + validResults.join(", "),
+      });
+    }
+
+    let order = await Order.findOne({ orderId: id });
+    if (!order && id.match(/^[0-9a-fA-F]{24}$/)) {
+      order = await Order.findById(id);
+    }
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found for call logging." });
+    }
+
+    const callerName =
+      customCallerName ||
+      req.user?.name ||
+      req.user?.email ||
+      "Admin Employee";
+    const callerEmail = req.user?.email;
+
+    const parsedFollowUpDate = followUpDate ? new Date(followUpDate) : undefined;
+    const callTime = new Date();
+
+    const newCallLog = {
+      callerName,
+      callerEmail,
+      callResult,
+      callTime,
+      notes: notes?.trim() || "",
+      followUpDate: parsedFollowUpDate,
+      orderStatusAtCall: order.status,
+    };
+
+    if (!order.callLogs) {
+      order.callLogs = [];
+    }
+    order.callLogs.push(newCallLog as any);
+
+    order.lastCallStatus = callResult;
+    order.lastCallAt = callTime;
+    order.lastCalledBy = callerName;
+    order.nextFollowUpAt = parsedFollowUpDate;
+
+    // Synchronize primary order status if requested
+    if (syncOrderStatus) {
+      let targetStatus: "confirmed" | "cancelled" | null = null;
+      if (callResult === "confirmed") targetStatus = "confirmed";
+      if (callResult === "cancelled") targetStatus = "cancelled";
+
+      if (targetStatus && targetStatus !== order.status) {
+        const oldStatus = order.status;
+        order.status = targetStatus;
+
+        if (targetStatus === "cancelled" && oldStatus !== "cancelled") {
+          for (const item of order.items) {
+            const product = await Product.findById(item.productRef);
+            if (product) {
+              product.stockCount += item.quantity;
+              product.inStock = true;
+              await product.save();
+            }
+          }
+          const customer = await Customer.findOne({ phone: order.phone });
+          if (customer) {
+            customer.totalSpending = Math.max(0, customer.totalSpending - order.total);
+            customer.totalOrders = Math.max(0, customer.totalOrders - 1);
+            await customer.save();
+          }
+        }
+
+        if (oldStatus === "cancelled" && targetStatus !== "cancelled") {
+          for (const item of order.items) {
+            const product = await Product.findById(item.productRef);
+            if (product) {
+              product.stockCount = Math.max(0, product.stockCount - item.quantity);
+              if (product.stockCount <= 0) product.inStock = false;
+              await product.save();
+            }
+          }
+          const customer = await Customer.findOne({ phone: order.phone });
+          if (customer) {
+            customer.totalSpending += order.total;
+            customer.totalOrders += 1;
+            await customer.save();
+          }
+        }
+      }
+    }
+
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Call log recorded successfully.",
+      order,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getCallHistory = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+
+    let order = await Order.findOne({ orderId: id });
+    if (!order && id.match(/^[0-9a-fA-F]{24}$/)) {
+      order = await Order.findById(id);
+    }
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      callLogs: order.callLogs || [],
+      lastCallStatus: order.lastCallStatus || "no_call",
+      lastCallAt: order.lastCallAt,
+      lastCalledBy: order.lastCalledBy,
+      nextFollowUpAt: order.nextFollowUpAt,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

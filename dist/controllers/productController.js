@@ -73,7 +73,7 @@ const getProductById = async (req, res, next) => {
 exports.getProductById = getProductById;
 const createProduct = async (req, res, next) => {
     try {
-        const { title, category, categoryId, price, originalPrice, rating, reviewsCount, images, phone, whatsapp, unit, badge, description, features, howToUse, specifications, faqs, inStock, stockCount, status, featured, bestSeller, seoTitle, seoDescription, } = req.body;
+        const { title, category, categoryId, price, costPrice, originalPrice, rating, reviewsCount, images, phone, whatsapp, unit, badge, description, features, howToUse, specifications, faqs, inStock, stockCount, status, featured, bestSeller, seoTitle, seoDescription, } = req.body;
         if (!title || !category || !categoryId || !price || !images || !unit || !description) {
             return res.status(400).json({
                 success: false,
@@ -87,6 +87,7 @@ const createProduct = async (req, res, next) => {
             category,
             categoryId,
             price,
+            costPrice: costPrice !== undefined ? costPrice : 0,
             originalPrice,
             rating,
             reviewsCount,

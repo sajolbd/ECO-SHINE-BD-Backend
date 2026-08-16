@@ -21,12 +21,37 @@ const getDashboardStats = async (req, res, next) => {
         const recentProducts = await Product_1.Product.find({})
             .sort({ createdAt: -1 })
             .limit(5);
-        // Calculate revenue (sum of total of all non-cancelled orders)
-        const revenueStats = await Order_1.Order.aggregate([
+        // Calculate revenue and gross profit (excluding delivery fee)
+        const revenueAndProfitStats = await Order_1.Order.aggregate([
             { $match: { status: { $ne: "cancelled" } } },
-            { $group: { _id: null, totalRevenue: { $sum: "$total" } } },
+            {
+                $project: {
+                    total: 1,
+                    subtotal: 1,
+                    itemsCost: {
+                        $sum: {
+                            $map: {
+                                input: "$items",
+                                as: "item",
+                                in: { $multiply: [{ $ifNull: ["$$item.costPrice", 0] }, "$$item.quantity"] }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalRevenue: { $sum: "$total" },
+                    totalSubtotal: { $sum: "$subtotal" },
+                    totalItemsCost: { $sum: "$itemsCost" }
+                }
+            }
         ]);
-        const totalRevenue = revenueStats[0]?.totalRevenue || 0;
+        const totalRevenue = revenueAndProfitStats[0]?.totalRevenue || 0;
+        const totalSubtotal = revenueAndProfitStats[0]?.totalSubtotal || 0;
+        const totalItemsCost = revenueAndProfitStats[0]?.totalItemsCost || 0;
+        const grossProfit = totalSubtotal - totalItemsCost;
         // Last 7 days orders chart data
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
@@ -51,6 +76,7 @@ const getDashboardStats = async (req, res, next) => {
                 completedOrders,
                 totalCustomers,
                 totalRevenue,
+                grossProfit,
             },
             recentOrders,
             recentProducts,

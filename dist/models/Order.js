@@ -7,9 +7,31 @@ const OrderItemSchema = new mongoose_1.Schema({
     productRef: { type: mongoose_1.Schema.Types.ObjectId, ref: "Product", required: true },
     title: { type: String, required: true },
     price: { type: Number, required: true },
+    costPrice: { type: Number, required: true, default: 0 },
     quantity: { type: Number, required: true, min: 1 },
     image: { type: String, required: true },
 });
+const CallLogSchema = new mongoose_1.Schema({
+    callerName: { type: String, required: true },
+    callerEmail: { type: String },
+    callResult: {
+        type: String,
+        enum: [
+            "confirmed",
+            "cancelled",
+            "no_answer",
+            "busy",
+            "wrong_number",
+            "phone_off",
+            "callback_requested",
+        ],
+        required: true,
+    },
+    callTime: { type: Date, default: Date.now, required: true },
+    notes: { type: String },
+    followUpDate: { type: Date },
+    orderStatusAtCall: { type: String },
+}, { _id: true });
 const OrderSchema = new mongoose_1.Schema({
     orderId: { type: String, required: true, unique: true, index: true },
     customerName: { type: String, required: true },
@@ -31,5 +53,24 @@ const OrderSchema = new mongoose_1.Schema({
     },
     note: { type: String },
     dateString: { type: String, required: true },
+    callLogs: { type: [CallLogSchema], default: [] },
+    lastCallStatus: {
+        type: String,
+        enum: [
+            "no_call",
+            "confirmed",
+            "cancelled",
+            "no_answer",
+            "busy",
+            "wrong_number",
+            "phone_off",
+            "callback_requested",
+        ],
+        default: "no_call",
+        index: true,
+    },
+    lastCallAt: { type: Date },
+    lastCalledBy: { type: String },
+    nextFollowUpAt: { type: Date },
 }, { timestamps: true });
 exports.Order = (0, mongoose_1.model)("Order", OrderSchema);

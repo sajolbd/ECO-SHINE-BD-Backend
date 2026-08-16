@@ -61,7 +61,13 @@ app.use("/api", api_1.default);
 // Register Global Error Handler
 app.use(errorHandler_1.errorHandler);
 // Listen on server
-app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
-});
+if (process.env.VERCEL !== "1") {
+    app.use((req, res, next) => {
+        // local logger helper
+        next();
+    });
+    app.listen(PORT, () => {
+        console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
+    });
+}
 exports.default = app;

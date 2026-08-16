@@ -8,7 +8,12 @@ const uploadMedia = async (req, res, next) => {
         if (!req.file) {
             return res.status(400).json({ success: false, message: "Please select an image file to upload." });
         }
-        const { url, publicId, format, sizeBytes } = await (0, cloudinary_1.uploadToCloudinary)(req.file.buffer, "ecoshine");
+        const base64Data = req.file.buffer.toString("base64");
+        const mimeType = req.file.mimetype;
+        const url = `data:${mimeType};base64,${base64Data}`;
+        const publicId = `local-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+        const format = req.file.mimetype.split("/")[1] || "jpeg";
+        const sizeBytes = req.file.size;
         const media = await Media_1.Media.create({
             url,
             publicId,
@@ -57,8 +62,15 @@ const deleteMedia = async (req, res, next) => {
         if (!media) {
             return res.status(404).json({ success: false, message: "Media resource not found to delete." });
         }
-        // Delete asset from Cloudinary
-        await (0, cloudinary_1.deleteFromCloudinary)(media.publicId);
+        // Delete asset from Cloudinary if it's not locally stored in DB
+        if (!media.publicId.startsWith("local-")) {
+            try {
+                await (0, cloudinary_1.deleteFromCloudinary)(media.publicId);
+            }
+            catch (err) {
+                console.error("Cloudinary deletion failed, continuing:", err);
+            }
+        }
         // Delete record from DB
         await Media_1.Media.findByIdAndDelete(media._id);
         res.status(200).json({ success: true, message: "Media deleted successfully from storage." });

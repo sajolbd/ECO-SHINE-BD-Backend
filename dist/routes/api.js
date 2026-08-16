@@ -86,6 +86,8 @@ router.post("/orders", orderController.createOrder); // Open public endpoint for
 router.get("/orders", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.getOrders);
 router.get("/orders/:id", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.getOrderById);
 router.put("/orders/:id/status", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.updateOrderStatus);
+router.post("/orders/:id/calls", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.addCallLog);
+router.get("/orders/:id/calls", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.getCallHistory);
 /* -------------------------------------------------------------------------- */
 /*                            CUSTOMER ROUTES                                 */
 /* -------------------------------------------------------------------------- */

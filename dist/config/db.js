@@ -9,7 +9,10 @@ const connectDB = async () => {
     const uri = process.env.MONGODB_URI;
     if (!uri) {
         console.error("Error: MONGODB_URI environment variable is missing.");
-        process.exit(1);
+        if (process.env.VERCEL !== "1") {
+            process.exit(1);
+        }
+        return;
     }
     try {
         const conn = await mongoose_1.default.connect(uri);
@@ -17,7 +20,9 @@ const connectDB = async () => {
     }
     catch (error) {
         console.error(`MongoDB Connection Error: ${error.message}`);
-        process.exit(1);
+        if (process.env.VERCEL !== "1") {
+            process.exit(1);
+        }
     }
 };
 exports.connectDB = connectDB;
