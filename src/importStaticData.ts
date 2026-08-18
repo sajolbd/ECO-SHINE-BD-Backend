@@ -23,16 +23,16 @@ const importStaticData = async () => {
     await Category.deleteMany({}); // Reset categories
     const categoriesData = [
       {
-        name: "অটো কেয়ার & কার ওয়াশ (Auto Care)",
-        slug: "autocare",
-        description: "গাড়ির কালার গার্ড ফোমিং জেল, শাইনিং ওয়াক্স ও মেটাল প্রটেক্টর",
+        name: "Cleaning products",
+        slug: "cleaning-products",
+        description: "গাড়ির কালার গার্ড ফোমিং জেল, শাইনিং ওয়াক্স ও মেটাল প্রটেক্টর সহ যাবতীয় ক্লিনিং সলিউশন",
         image: "/images/products/product-7.jpeg",
         displayOrder: 1,
       },
       {
-        name: "হোম & গ্রিজ ক্লিনার (Home Care)",
-        slug: "homecare",
-        description: "বাসাবাড়ির কিচেন গ্রিজ ক্লিনার, গ্লাস ক্লিনার ও ফ্লোর ক্লিনার",
+        name: "Houseware",
+        slug: "houseware",
+        description: "বাসাবাড়ির কিচেন গ্রিজ ক্লিনার, গ্লাস ক্লিনার ও ফ্লোর ক্লিনার সহ হাউজওয়্যার প্রোডাক্টস",
         image: "/images/products/product-1.jpeg",
         displayOrder: 2,
       },
@@ -95,7 +95,7 @@ const importStaticData = async () => {
     const seededProducts = [];
 
     for (const raw of rawProducts) {
-      const isAuto = raw.categoryId === "autocare";
+      const isAuto = raw.categoryId === "cleaning-products" || raw.categoryId === "autocare";
 
       const features = raw.features || (isAuto ? defaultAutoFeatures : defaultHomeFeatures);
       const howToUse = raw.howToUse || (isAuto ? defaultAutoHowToUse : defaultHomeHowToUse);

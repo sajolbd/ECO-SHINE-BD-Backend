@@ -17,8 +17,8 @@ const DEFAULT_SEO_METADATA: any = {
   categories: {
     pageName: "categories",
     title: "ক্যাটাগরি সমূহ | Eco Shine Bangladesh",
-    description: "অটো কেয়ার এবং হোম কিচেন কেয়ার ক্যাটাগরির প্রোডাক্টসমূহ দেখুন।",
-    keywords: ["ক্যাটাগরি", "অটো কেয়ার", "হোম কেয়ার"],
+    description: "Cleaning products এবং Houseware ক্যাটাগরির প্রোডাক্টসমূহ দেখুন।",
+    keywords: ["ক্যাটাগরি", "Cleaning products", "Houseware"],
   },
   about: {
     pageName: "about",

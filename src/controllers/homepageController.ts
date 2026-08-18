@@ -11,7 +11,7 @@ const DEFAULT_HOMEPAGE = {
   heroMobileImage: "/images/home/hero/hero-bg-mobile.png",
   heroEnabled: true,
   featuredProducts: ["auto-1", "auto-2", "auto-3"],
-  featuredCategories: ["autocare", "homecare"],
+  featuredCategories: ["cleaning-products", "houseware"],
   whyChooseUs: [
     { icon: "Award", title: "১০০% প্রিমিয়াম কোয়ালিটি", description: "আমাদের সব প্রোডাক্ট সর্বোচ্চ মান নিয়ন্ত্রণ করে তৈরি হয়।", displayOrder: 1, status: "active" },
     { icon: "Truck", title: "দ্রুত ডেলিভারি", description: "সারা বাংলাদেশে ৭২ ঘণ্টার মধ্যে ক্যাশ অন ডেলিভারি সম্পন্ন করি।", displayOrder: 2, status: "active" },

@@ -3,7 +3,7 @@ import { Product } from "../models/Product";
 
 // Helper to slugify names into text IDs
 const generateProductId = (title: string, categoryId: string): string => {
-  const prefix = categoryId === "autocare" ? "auto" : categoryId === "homecare" ? "home" : "prod";
+  const prefix = (categoryId === "cleaning-products" || categoryId === "autocare") ? "auto" : (categoryId === "houseware" || categoryId === "homecare") ? "home" : "prod";
   const slug = title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "") // remove non-alphanumeric chars
