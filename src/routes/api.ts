@@ -17,6 +17,7 @@ import * as seoController from "../controllers/seoController";
 import * as mediaController from "../controllers/mediaController";
 import * as settingsController from "../controllers/settingsController";
 import * as adminUserController from "../controllers/adminUserController";
+import * as courierController from "../controllers/courierController";
 
 const router = Router();
 
@@ -61,8 +62,13 @@ router.put("/orders/:id/status", requireAuth, requireRole(["super-admin", "admin
 router.post("/orders/:id/calls", requireAuth, requireRole(["super-admin", "admin", "editor"]), orderController.addCallLog);
 router.get("/orders/:id/calls", requireAuth, requireRole(["super-admin", "admin", "editor"]), orderController.getCallHistory);
 
-
 /* -------------------------------------------------------------------------- */
+/*                        STEADFAST COURIER ROUTES                           */
+/* -------------------------------------------------------------------------- */
+router.post("/courier/steadfast/send/:orderId", requireAuth, requireRole(["super-admin", "admin", "editor"]), courierController.sendOrderToSteadfast);
+router.get("/courier/steadfast/status/:orderId", requireAuth, requireRole(["super-admin", "admin", "editor"]), courierController.getSteadfastOrderStatus);
+router.get("/courier/steadfast/balance", requireAuth, requireRole(["super-admin", "admin", "editor"]), courierController.getSteadfastBalance);
+router.post("/courier/steadfast/bulk-send", requireAuth, requireRole(["super-admin", "admin", "editor"]), courierController.bulkSendToSteadfast);
 /*                            CUSTOMER ROUTES                                 */
 /* -------------------------------------------------------------------------- */
 router.get("/customers", requireAuth, requireRole(["super-admin", "admin", "editor"]), customerController.getCustomers);

@@ -51,6 +51,7 @@ const seoController = __importStar(require("../controllers/seoController"));
 const mediaController = __importStar(require("../controllers/mediaController"));
 const settingsController = __importStar(require("../controllers/settingsController"));
 const adminUserController = __importStar(require("../controllers/adminUserController"));
+const courierController = __importStar(require("../controllers/courierController"));
 const router = (0, express_1.Router)();
 /* -------------------------------------------------------------------------- */
 /*                               AUTH ROUTES                                  */
@@ -89,6 +90,12 @@ router.put("/orders/:id/status", auth_1.requireAuth, (0, auth_1.requireRole)(["s
 router.post("/orders/:id/calls", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.addCallLog);
 router.get("/orders/:id/calls", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), orderController.getCallHistory);
 /* -------------------------------------------------------------------------- */
+/*                        STEADFAST COURIER ROUTES                           */
+/* -------------------------------------------------------------------------- */
+router.post("/courier/steadfast/send/:orderId", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), courierController.sendOrderToSteadfast);
+router.get("/courier/steadfast/status/:orderId", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), courierController.getSteadfastOrderStatus);
+router.get("/courier/steadfast/balance", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), courierController.getSteadfastBalance);
+router.post("/courier/steadfast/bulk-send", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), courierController.bulkSendToSteadfast);
 /*                            CUSTOMER ROUTES                                 */
 /* -------------------------------------------------------------------------- */
 router.get("/customers", auth_1.requireAuth, (0, auth_1.requireRole)(["super-admin", "admin", "editor"]), customerController.getCustomers);

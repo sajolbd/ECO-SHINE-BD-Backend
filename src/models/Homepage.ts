@@ -25,6 +25,7 @@ export interface IHomepage extends Document {
   heroDesktopImage: string;
   heroMobileImage: string;
   heroEnabled: boolean;
+  announcements?: string[];
   featuredProducts: string[]; // references Product.id values e.g. ["auto-1", "home-2"]
   featuredCategories: string[]; // references Category.slug values e.g. ["autocare", "homecare"]
   whyChooseUs: IWhyChooseUsItem[];
@@ -51,14 +52,15 @@ const PromotionalSectionSchema = new Schema<IPromotionalSection>({
 
 const HomepageSchema = new Schema<IHomepage>(
   {
-    heroHeading: { type: String, required: true },
-    heroDescription: { type: String, required: true },
-    heroBadge: { type: String },
-    heroButtonText: { type: String },
-    heroButtonUrl: { type: String },
-    heroDesktopImage: { type: String, required: true },
-    heroMobileImage: { type: String, required: true },
+    heroHeading: { type: String, default: "Shine Your World With Eco Shine" },
+    heroDescription: { type: String, default: "গাড়ির কালার গার্ড ফোমিং জেল, শাইনিং ওয়াক্স ও মেটাল প্রটেক্টর সহ আমাদের সেরা মানের পরিবেশবান্ধব প্রোডাক্টস।" },
+    heroBadge: { type: String, default: "Bangladesh's #1 Eco-Shine & Renovation Hub" },
+    heroButtonText: { type: String, default: "প্রোডাক্ট দেখুন" },
+    heroButtonUrl: { type: String, default: "#products" },
+    heroDesktopImage: { type: String, default: "/images/home/hero/hero-bg.png" },
+    heroMobileImage: { type: String, default: "/images/home/hero/hero-bg-mobile.png" },
     heroEnabled: { type: Boolean, default: true },
+    announcements: { type: [String], default: [] },
     featuredProducts: { type: [String], default: [] },
     featuredCategories: { type: [String], default: [] },
     whyChooseUs: { type: [WhyChooseUsSchema], default: [] },

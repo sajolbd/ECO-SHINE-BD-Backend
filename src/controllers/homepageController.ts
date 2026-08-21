@@ -10,6 +10,12 @@ const DEFAULT_HOMEPAGE = {
   heroDesktopImage: "/images/home/hero/hero-bg.png",
   heroMobileImage: "/images/home/hero/hero-bg-mobile.png",
   heroEnabled: true,
+  announcements: [
+    "স্বাগতম ইকো সাইন বাংলাদেশে — পরিবেশবান্ধব ক্লিনিং ও কালার গার্ড ফোমিং সলিউশন!",
+    "সারা বাংলাদেশে ক্যাশ অন ডেলিভারি — পণ্য হাতে পেয়ে মূল্য পরিশোধের সুবিধা!",
+    "১০০% অরিজিনাল ও প্রিমিয়াম কোয়ালিটি গ্যারান্টিযুক্ত প্রোডাক্টস!",
+    "জরুরি অর্ডারের জন্য কল করুন: 01958-058359 | হোয়াটসঅ্যাপেও মেসেজ দেওয়া যাবে।"
+  ],
   featuredProducts: ["auto-1", "auto-2", "auto-3"],
   featuredCategories: ["cleaning-products", "houseware"],
   whyChooseUs: [
@@ -26,6 +32,9 @@ export const getHomepage = async (req: Request, res: Response, next: NextFunctio
 
     if (!homepage) {
       homepage = await Homepage.create(DEFAULT_HOMEPAGE);
+    } else if (!homepage.announcements || homepage.announcements.length === 0) {
+      homepage.announcements = DEFAULT_HOMEPAGE.announcements;
+      await homepage.save();
     }
 
     res.status(200).json({ success: true, homepage });
@@ -38,10 +47,17 @@ export const updateHomepage = async (req: Request, res: Response, next: NextFunc
   try {
     let homepage = await Homepage.findOne({});
 
+    const updateData = { ...req.body };
+    if (!updateData.heroHeading || !updateData.heroHeading.trim()) updateData.heroHeading = DEFAULT_HOMEPAGE.heroHeading;
+    if (!updateData.heroDescription || !updateData.heroDescription.trim()) updateData.heroDescription = DEFAULT_HOMEPAGE.heroDescription;
+    if (!updateData.heroDesktopImage || !updateData.heroDesktopImage.trim()) updateData.heroDesktopImage = DEFAULT_HOMEPAGE.heroDesktopImage;
+    if (!updateData.heroMobileImage || !updateData.heroMobileImage.trim()) updateData.heroMobileImage = DEFAULT_HOMEPAGE.heroMobileImage;
+    if (!updateData.announcements || updateData.announcements.length === 0) updateData.announcements = DEFAULT_HOMEPAGE.announcements;
+
     if (!homepage) {
-      homepage = await Homepage.create({ ...DEFAULT_HOMEPAGE, ...req.body });
+      homepage = await Homepage.create({ ...DEFAULT_HOMEPAGE, ...updateData });
     } else {
-      homepage = await Homepage.findByIdAndUpdate(homepage._id, req.body, {
+      homepage = await Homepage.findByIdAndUpdate(homepage._id, updateData, {
         new: true,
         runValidators: true,
       });

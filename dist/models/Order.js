@@ -72,5 +72,10 @@ const OrderSchema = new mongoose_1.Schema({
     lastCallAt: { type: Date },
     lastCalledBy: { type: String },
     nextFollowUpAt: { type: Date },
+    courierName: { type: String, default: "Steadfast" },
+    courierConsignmentId: { type: String },
+    courierTrackingCode: { type: String },
+    courierStatus: { type: String },
+    courierSentAt: { type: Date },
 }, { timestamps: true });
 exports.Order = (0, mongoose_1.model)("Order", OrderSchema);

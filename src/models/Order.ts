@@ -50,6 +50,11 @@ export interface IOrder extends Document {
   lastCallAt?: Date;
   lastCalledBy?: string;
   nextFollowUpAt?: Date;
+  courierName?: string;
+  courierConsignmentId?: string;
+  courierTrackingCode?: string;
+  courierStatus?: string;
+  courierSentAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -130,6 +135,11 @@ const OrderSchema = new Schema<IOrder>(
     lastCallAt: { type: Date },
     lastCalledBy: { type: String },
     nextFollowUpAt: { type: Date },
+    courierName: { type: String, default: "Steadfast" },
+    courierConsignmentId: { type: String },
+    courierTrackingCode: { type: String },
+    courierStatus: { type: String },
+    courierSentAt: { type: Date },
   },
   { timestamps: true }
 );
