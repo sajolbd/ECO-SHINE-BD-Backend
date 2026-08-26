@@ -39,8 +39,8 @@ router.get("/dashboard/stats", requireAuth, requireRole(["super-admin", "admin",
 /* -------------------------------------------------------------------------- */
 router.get("/products", productController.getProducts);
 router.get("/products/:id", productController.getProductById);
-router.post("/products", requireAuth, requireRole(["super-admin", "admin"]), productController.createProduct);
-router.put("/products/:id", requireAuth, requireRole(["super-admin", "admin"]), productController.updateProduct);
+router.post("/products", requireAuth, requireRole(["super-admin", "admin", "editor"]), productController.createProduct);
+router.put("/products/:id", requireAuth, requireRole(["super-admin", "admin", "editor"]), productController.updateProduct);
 router.delete("/products/:id", requireAuth, requireRole(["super-admin"]), productController.deleteProduct);
 
 /* -------------------------------------------------------------------------- */
