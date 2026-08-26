@@ -6,23 +6,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
+    // If already connected (readyState 1) or connecting (readyState 2), return
+    if (mongoose_1.default.connection.readyState >= 1) {
+        return;
+    }
     const uri = process.env.MONGODB_URI;
     if (!uri) {
         console.error("Error: MONGODB_URI environment variable is missing.");
-        if (process.env.VERCEL !== "1") {
-            process.exit(1);
-        }
         return;
     }
     try {
-        const conn = await mongoose_1.default.connect(uri);
+        const conn = await mongoose_1.default.connect(uri, {
+            serverSelectionTimeoutMS: 10000,
+            bufferCommands: true,
+        });
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     }
     catch (error) {
         console.error(`MongoDB Connection Error: ${error.message}`);
-        if (process.env.VERCEL !== "1") {
-            process.exit(1);
-        }
+        throw error;
     }
 };
 exports.connectDB = connectDB;

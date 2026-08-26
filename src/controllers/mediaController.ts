@@ -8,13 +8,30 @@ export const uploadMedia = async (req: Request, res: Response, next: NextFunctio
       return res.status(400).json({ success: false, message: "Please select an image file to upload." });
     }
 
-    const base64Data = req.file.buffer.toString("base64");
-    const mimeType = req.file.mimetype;
-    const url = `data:${mimeType};base64,${base64Data}`;
-    
-    const publicId = `local-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
-    const format = req.file.mimetype.split("/")[1] || "jpeg";
-    const sizeBytes = req.file.size;
+    let url = "";
+    let publicId = "";
+    let format = req.file.mimetype.split("/")[1] || "jpeg";
+    let sizeBytes = req.file.size;
+
+    // Check if Cloudinary credentials are provided in env
+    if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY) {
+      try {
+        const cloudRes = await uploadToCloudinary(req.file.buffer);
+        url = cloudRes.url;
+        publicId = cloudRes.publicId;
+        format = cloudRes.format;
+        sizeBytes = cloudRes.sizeBytes;
+      } catch (err) {
+        console.error("Cloudinary upload failed, falling back to local base64:", err);
+      }
+    }
+
+    if (!url) {
+      const base64Data = req.file.buffer.toString("base64");
+      const mimeType = req.file.mimetype;
+      url = `data:${mimeType};base64,${base64Data}`;
+      publicId = `local-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    }
 
     const media = await Media.create({
       url,
