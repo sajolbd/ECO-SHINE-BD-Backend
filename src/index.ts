@@ -79,6 +79,16 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
+// Middleware to ensure DB is connected before handling API requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Register API Routes
 app.use("/api", apiRoutes);
 
