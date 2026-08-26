@@ -1,22 +1,29 @@
 import mongoose from "mongoose";
 
-export const connectDB = async (): Promise<void> => {
-  // If already connected (readyState 1) or connecting (readyState 2), return
-  if (mongoose.connection.readyState >= 1) {
-    return;
+let cachedPromise: Promise<typeof mongoose> | null = null;
+
+export const connectDB = async (): Promise<typeof mongoose> => {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose;
+  }
+
+  if (cachedPromise) {
+    return cachedPromise;
   }
 
   const uri = process.env.MONGODB_URI || "mongodb+srv://sajolibn_db_user:82WA5fHDwSEnWgXd@cluster0.vi2cirn.mongodb.net/?appName=Cluster0";
 
-  try {
-    const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 4000,
-      connectTimeoutMS: 4000,
-      bufferCommands: false,
-    });
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error: any) {
-    console.error(`MongoDB Connection Error: ${error.message}`);
-    throw error;
-  }
+  cachedPromise = mongoose.connect(uri, {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+  }).then((m) => {
+    console.log(`MongoDB Connected: ${m.connection.host}`);
+    return m;
+  }).catch((err) => {
+    cachedPromise = null;
+    console.error(`MongoDB Connection Error: ${err.message}`);
+    throw err;
+  });
+
+  return cachedPromise;
 };
