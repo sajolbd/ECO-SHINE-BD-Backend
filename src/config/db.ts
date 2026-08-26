@@ -6,17 +6,13 @@ export const connectDB = async (): Promise<void> => {
     return;
   }
 
-  const uri = process.env.MONGODB_URI;
-
-  if (!uri) {
-    console.error("Error: MONGODB_URI environment variable is missing.");
-    return;
-  }
+  const uri = process.env.MONGODB_URI || "mongodb+srv://sajolibn_db_user:82WA5fHDwSEnWgXd@cluster0.vi2cirn.mongodb.net/?appName=Cluster0";
 
   try {
     const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 10000,
-      bufferCommands: true,
+      serverSelectionTimeoutMS: 4000,
+      connectTimeoutMS: 4000,
+      bufferCommands: false,
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error: any) {
