@@ -15,14 +15,32 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS configuration
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",")
-  : ["http://localhost:3000", "http://localhost:3001"];
+const defaultOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "https://ecoshinebd.com",
+  "https://www.ecoshinebd.com",
+  "https://dashboard.ecoshinebd.com",
+  "https://www.dashboard.ecoshinebd.com",
+  "https://eco-shine-bd.vercel.app",
+  "https://dashboard-eco-shine-bd.vercel.app",
+];
+
+const envOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+  : [];
+
+const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      if (
+        !origin ||
+        allowedOrigins.indexOf(origin) !== -1 ||
+        origin.endsWith("ecoshinebd.com")
+      ) {
         callback(null, true);
       } else {
         callback(new Error(`CORS policy blocked access from origin: ${origin}`));
