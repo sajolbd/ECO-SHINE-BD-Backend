@@ -8,6 +8,7 @@ export interface IOrderItem {
   costPrice: number;
   quantity: number;
   image: string;
+  selectedColor?: string;
 }
 
 export type CallResult =
@@ -67,6 +68,7 @@ const OrderItemSchema = new Schema<IOrderItem>({
   costPrice: { type: Number, required: true, default: 0 },
   quantity: { type: Number, required: true, min: 1 },
   image: { type: String, required: true },
+  selectedColor: { type: String },
 });
 
 const CallLogSchema = new Schema<ICallLog>(

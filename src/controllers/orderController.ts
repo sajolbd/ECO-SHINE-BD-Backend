@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Order } from "../models/Order";
 import { Product } from "../models/Product";
 import { Customer } from "../models/Customer";
+import { SiteSettings } from "../models/SiteSettings";
 import { Types } from "mongoose";
 
 // Generate unique Bengali date string
@@ -62,10 +63,38 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
         costPrice: product.costPrice || 0,
         quantity: item.quantity,
         image: product.images[0] || "",
+        selectedColor: item.selectedColor || item.color || "",
       });
     }
 
-    const deliveryFee = deliveryArea === "inside" ? 70 : 130;
+    // Check if free delivery is applicable (item quantity >= product.freeDeliveryMinQty or default 2)
+    let hasFreeDelivery = false;
+    for (const item of items) {
+      const product = await Product.findOne({ id: item.productId });
+      const minQty = (product && product.freeDeliveryMinQty !== undefined) ? product.freeDeliveryMinQty : 2;
+
+      if (item.quantity >= minQty) {
+        hasFreeDelivery = true;
+        break;
+      }
+    }
+
+    let deliveryFee = 0;
+    if (!hasFreeDelivery) {
+      let deliveryChargeInside = 70;
+      let deliveryChargeOutside = 130;
+      try {
+        const settings = await SiteSettings.findOne({});
+        if (settings) {
+          deliveryChargeInside = settings.deliveryChargeInside ?? 70;
+          deliveryChargeOutside = settings.deliveryChargeOutside ?? 130;
+        }
+      } catch (err) {
+        // Fallback to hardcoded defaults
+      }
+      deliveryFee = deliveryArea === "inside" ? deliveryChargeInside : deliveryChargeOutside;
+    }
+
     const total = subtotal + deliveryFee;
     const orderId = `ESB-${Math.floor(100000 + Math.random() * 900000)}`;
 

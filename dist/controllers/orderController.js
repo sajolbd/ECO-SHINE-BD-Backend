@@ -4,6 +4,7 @@ exports.getCallHistory = exports.addCallLog = exports.updateOrderStatus = export
 const Order_1 = require("../models/Order");
 const Product_1 = require("../models/Product");
 const Customer_1 = require("../models/Customer");
+const SiteSettings_1 = require("../models/SiteSettings");
 // Generate unique Bengali date string
 const getBengaliDateString = () => {
     return new Date().toLocaleDateString("bn-BD", {
@@ -54,9 +55,35 @@ const createOrder = async (req, res, next) => {
                 costPrice: product.costPrice || 0,
                 quantity: item.quantity,
                 image: product.images[0] || "",
+                selectedColor: item.selectedColor || item.color || "",
             });
         }
-        const deliveryFee = deliveryArea === "inside" ? 70 : 130;
+        // Check if free delivery is applicable (item quantity >= product.freeDeliveryMinQty or default 2)
+        let hasFreeDelivery = false;
+        for (const item of items) {
+            const product = await Product_1.Product.findOne({ id: item.productId });
+            const minQty = (product && product.freeDeliveryMinQty !== undefined) ? product.freeDeliveryMinQty : 2;
+            if (item.quantity >= minQty) {
+                hasFreeDelivery = true;
+                break;
+            }
+        }
+        let deliveryFee = 0;
+        if (!hasFreeDelivery) {
+            let deliveryChargeInside = 70;
+            let deliveryChargeOutside = 130;
+            try {
+                const settings = await SiteSettings_1.SiteSettings.findOne({});
+                if (settings) {
+                    deliveryChargeInside = settings.deliveryChargeInside ?? 70;
+                    deliveryChargeOutside = settings.deliveryChargeOutside ?? 130;
+                }
+            }
+            catch (err) {
+                // Fallback to hardcoded defaults
+            }
+            deliveryFee = deliveryArea === "inside" ? deliveryChargeInside : deliveryChargeOutside;
+        }
         const total = subtotal + deliveryFee;
         const orderId = `ESB-${Math.floor(100000 + Math.random() * 900000)}`;
         // 2. Create the Order

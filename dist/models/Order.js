@@ -10,6 +10,7 @@ const OrderItemSchema = new mongoose_1.Schema({
     costPrice: { type: Number, required: true, default: 0 },
     quantity: { type: Number, required: true, min: 1 },
     image: { type: String, required: true },
+    selectedColor: { type: String },
 });
 const CallLogSchema = new mongoose_1.Schema({
     callerName: { type: String, required: true },

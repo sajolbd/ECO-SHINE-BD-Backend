@@ -43,6 +43,17 @@ const ProductSchema = new mongoose_1.Schema({
     status: { type: String, enum: ["active", "inactive"], default: "active", required: true, index: true },
     featured: { type: Boolean, default: false },
     bestSeller: { type: Boolean, default: false },
+    freeDelivery: { type: Boolean, default: false },
+    freeDeliveryMinQty: { type: Number, default: 1, min: 1 },
+    isCombo: { type: Boolean, default: false },
+    comboItems: [
+        {
+            productId: { type: String },
+            title: { type: String },
+            quantity: { type: Number, default: 1 },
+        },
+    ],
+    colors: { type: [String], default: [] },
     seoTitle: { type: String },
     seoDescription: { type: String },
 }, { timestamps: true });

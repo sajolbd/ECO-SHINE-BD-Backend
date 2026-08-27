@@ -101,6 +101,11 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
       status,
       featured,
       bestSeller,
+      freeDelivery,
+      freeDeliveryMinQty,
+      isCombo,
+      comboItems,
+      colors,
       seoTitle,
       seoDescription,
     } = req.body;
@@ -139,6 +144,11 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
       status: status || "active",
       featured: featured || false,
       bestSeller: bestSeller || false,
+      freeDelivery: freeDelivery || false,
+      freeDeliveryMinQty: freeDeliveryMinQty !== undefined ? Number(freeDeliveryMinQty) : 1,
+      isCombo: isCombo || false,
+      comboItems: comboItems || [],
+      colors: colors || [],
       seoTitle,
       seoDescription,
     });

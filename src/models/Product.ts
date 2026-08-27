@@ -16,6 +16,12 @@ export interface IProductFaqItem {
   answer: string;
 }
 
+export interface IComboItem {
+  productId: string;
+  title: string;
+  quantity: number;
+}
+
 export interface IProduct extends Document {
   id: string; // Unique URL identifier e.g. "auto-1"
   title: string;
@@ -41,6 +47,11 @@ export interface IProduct extends Document {
   status: "active" | "inactive";
   featured: boolean;
   bestSeller: boolean;
+  freeDelivery?: boolean;
+  freeDeliveryMinQty?: number;
+  isCombo?: boolean;
+  comboItems?: IComboItem[];
+  colors?: string[];
   seoTitle?: string;
   seoDescription?: string;
   createdAt: Date;
@@ -89,6 +100,17 @@ const ProductSchema = new Schema<IProduct>(
     status: { type: String, enum: ["active", "inactive"], default: "active", required: true, index: true },
     featured: { type: Boolean, default: false },
     bestSeller: { type: Boolean, default: false },
+    freeDelivery: { type: Boolean, default: false },
+    freeDeliveryMinQty: { type: Number, default: 1, min: 1 },
+    isCombo: { type: Boolean, default: false },
+    comboItems: [
+      {
+        productId: { type: String },
+        title: { type: String },
+        quantity: { type: Number, default: 1 },
+      },
+    ],
+    colors: { type: [String], default: [] },
     seoTitle: { type: String },
     seoDescription: { type: String },
   },
