@@ -58,11 +58,15 @@ const createOrder = async (req, res, next) => {
                 selectedColor: item.selectedColor || item.color || "",
             });
         }
-        // Check if free delivery is applicable (item quantity >= product.freeDeliveryMinQty or default 2)
+        // Check if free delivery is applicable (combo or item quantity >= product.freeDeliveryMinQty or default 2)
         let hasFreeDelivery = false;
         for (const item of items) {
             const product = await Product_1.Product.findOne({ id: item.productId });
-            const minQty = (product && product.freeDeliveryMinQty !== undefined) ? product.freeDeliveryMinQty : 2;
+            if (product?.isCombo) {
+                hasFreeDelivery = true;
+                break;
+            }
+            const minQty = (product && product.freeDeliveryMinQty && product.freeDeliveryMinQty > 1) ? product.freeDeliveryMinQty : 2;
             if (item.quantity >= minQty) {
                 hasFreeDelivery = true;
                 break;
