@@ -11,26 +11,5 @@
       "iconName": "Home"
     }
   ],
-  "products": [
-    {
-      "id": "auto-1",
-      "title": "বাবল বস কালার গার্ড ফোমিং জেল (৫৫০ মিলি)",
-      "category": "Cleaning products",
-      "categoryId": "cleaning-products",
-      "price": 350,
-      "originalPrice": 450,
-      "rating": 4.9,
-      "reviewsCount": 640,
-      "images": [
-        "/images/products/product-7.jpeg",
-        "/images/products/product-5.jpeg",
-        "/images/products/product-8.jpeg"
-      ],
-      "phone": "01958-058359",
-      "whatsapp": "8801958058359",
-      "unit": "৫৫০ মিলি (সাথে ১টি ফ্রি মাইক্রোফাইবার টাওয়েল)",
-      "badge": "হট ডিল",
-      "description": "আপনার প্রিয় গাড়ির পেইন্ট সুরক্ষা ও চকচকে ফোম ওয়াশের জন্য সেরা বাবল বস কালার গার্ড ফোমিং জেল।"
-    }
-  ]
+  "products": []
 }
