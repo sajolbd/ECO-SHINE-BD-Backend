@@ -16,7 +16,7 @@ const DEFAULT_HOMEPAGE = {
     "১০০% অরিজিনাল ও প্রিমিয়াম কোয়ালিটি গ্যারান্টিযুক্ত প্রোডাক্টস!",
     "জরুরি অর্ডারের জন্য কল করুন: 01958-058359 | হোয়াটসঅ্যাপেও মেসেজ দেওয়া যাবে।"
   ],
-  featuredProducts: ["auto-1", "auto-2", "auto-3"],
+  featuredProducts: [],
   featuredCategories: ["cleaning-products", "houseware"],
   whyChooseUs: [
     { icon: "Award", title: "১০০% প্রিমিয়াম কোয়ালিটি", description: "আমাদের সব প্রোডাক্ট সর্বোচ্চ মান নিয়ন্ত্রণ করে তৈরি হয়।", displayOrder: 1, status: "active" },
