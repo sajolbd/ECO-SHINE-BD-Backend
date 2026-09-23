@@ -18,6 +18,7 @@ import * as mediaController from "../controllers/mediaController";
 import * as settingsController from "../controllers/settingsController";
 import * as adminUserController from "../controllers/adminUserController";
 import * as courierController from "../controllers/courierController";
+import * as pixelController from "../controllers/pixelController";
 
 const router = Router();
 
@@ -126,6 +127,11 @@ router.put("/settings", requireAuth, requireRole(["super-admin"]), settingsContr
 router.get("/admin-users", requireAuth, requireRole(["super-admin"]), adminUserController.getAdminUsers);
 router.post("/admin-users", requireAuth, requireRole(["super-admin"]), adminUserController.createAdminUser);
 router.put("/admin-users/:id", requireAuth, requireRole(["super-admin"]), adminUserController.updateAdminUser);
-router.delete("/admin-users/:id", requireAuth, requireRole(["super-admin"]), adminUserController.deleteAdminUser);
+/* -------------------------------------------------------------------------- */
+/*                         FACEBOOK PIXEL & CAPI ROUTES                       */
+/* -------------------------------------------------------------------------- */
+router.get("/pixel", pixelController.getPixelSettings);
+router.put("/pixel", requireAuth, requireRole(["super-admin", "admin"]), pixelController.updatePixelSettings);
+router.post("/pixel/capi-event", pixelController.sendCAPIEvent);
 
 export default router;

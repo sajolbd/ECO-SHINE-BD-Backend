@@ -5,6 +5,7 @@ const Order_1 = require("../models/Order");
 const Product_1 = require("../models/Product");
 const Customer_1 = require("../models/Customer");
 const SiteSettings_1 = require("../models/SiteSettings");
+const pixelController_1 = require("./pixelController");
 // Generate unique Bengali date string
 const getBengaliDateString = () => {
     return new Date().toLocaleDateString("bn-BD", {
@@ -127,6 +128,30 @@ const createOrder = async (req, res, next) => {
                 lastOrderDate: new Date(),
             });
         }
+        // 4. Dispatch Meta Conversions API (CAPI) Purchase Event (Non-blocking)
+        (0, pixelController_1.dispatchCAPIEventHelper)({
+            eventName: "Purchase",
+            eventId: `order_${order.orderId}`,
+            eventSourceUrl: req.headers.referer || "https://www.ecoshinebd.com/checkout",
+            userData: {
+                phone,
+                email,
+                name: customerName,
+                clientIp: req.headers["x-forwarded-for"] || req.ip,
+                userAgent: req.headers["user-agent"],
+            },
+            customData: {
+                value: total,
+                currency: "BDT",
+                content_type: "product",
+                contents: validatedItems.map((item) => ({
+                    id: item.productId,
+                    quantity: item.quantity,
+                    item_price: item.price,
+                })),
+                order_id: order.orderId,
+            },
+        }).catch((err) => console.error("Background CAPI purchase trigger failed:", err));
         res.status(201).json({ success: true, order });
     }
     catch (error) {
